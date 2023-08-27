@@ -7,35 +7,41 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
 const claimUsernameFormSchema = z.object({
-  username: z.string()
-    .min(3, {message: 'O usuário precisa ter pelo menos 3 letras.'})
-    .regex(/^([a-z\\-]+)$/i, 
-      {message: 'O usuário pode ter apenas letras e hifens.'})
-    .transform(username => username.toLowerCase()),
+  username: z
+    .string()
+    .min(3, { message: 'O usuário precisa ter pelo menos 3 letras.' })
+    .regex(/^([a-z\\-]+)$/i, {
+      message: 'O usuário pode ter apenas letras e hifens.',
+    })
+    .transform((username) => username.toLowerCase()),
 })
 
 type ClaimUsernameFormData = z.infer<typeof claimUsernameFormSchema>
 
 export function ClaimUsernameForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<ClaimUsernameFormData>({
-    resolver: zodResolver(claimUsernameFormSchema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ClaimUsernameFormData>({
+    resolver: zodResolver(claimUsernameFormSchema),
   })
 
   const router = useRouter()
   async function handleClaimUserName(data: ClaimUsernameFormData) {
     const { username } = data
-    
+
     await router.push(`/register?username=${username}`)
   }
 
   return (
     <>
       <Form as="form" onSubmit={handleSubmit(handleClaimUserName)}>
-        <TextInput 
-          size="sm" 
-          prefix="dominio.com/" 
-          placeholder="seu-usuário" 
-          {...register('username')} 
+        <TextInput
+          size="sm"
+          prefix="dominio.com/"
+          placeholder="seu-usuário"
+          {...register('username')}
         />
         <Button size="md" type="submit">
           Reservar
@@ -51,6 +57,5 @@ export function ClaimUsernameForm() {
         </Text>
       </FormAnnotation>
     </>
-
   )
 }
