@@ -11,12 +11,15 @@ import { Container, Header } from '../styles'
 
 import { FormAnnotation, ProfileBox } from './styles'
 import {
+  Avatar,
   Button,
   Heading,
   MultiStep,
   Text,
   TextArea,
 } from '@project-design-system-ui/react'
+import { api } from '@/src/lib/axios'
+import { useRouter } from 'next/router'
 
 const updateProfileSchema = z.object({
   bio: z.string(),
@@ -34,15 +37,20 @@ export default function UpdateProfile() {
   })
 
   const session = useSession()
+  const router = useRouter()
 
-  console.log(session)
+  async function handleUpdateProfile(data: UpdateProfileData) {
+    await api.put('/users/profile', {
+      bio: data.bio,
+    })
 
-  async function handleUpdateProfile(data: UpdateProfileData) { }
+    await router.push(`schedule/${session.data?.user.username}`)
+  }
 
   return (
     <Container>
       <Header>
-        <Heading as="strong">Bem-vindo ao Book a time!</Heading>
+        <Heading as="strong">Bem-vindo ao Booking of times!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
           editar essas informações depois.
@@ -54,6 +62,10 @@ export default function UpdateProfile() {
       <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
         <label>
           <Text>Foto de perfil</Text>
+          <Avatar
+            src={session.data?.user.avatar_url}
+            alt={session.data?.user.name}
+          />
         </label>
 
         <label>

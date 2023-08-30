@@ -69,7 +69,7 @@ export default function Register() {
   return (
     <Container>
       <Header>
-        <Heading as="strong">Bem-vindo ao Book a time!</Heading>
+        <Heading as="strong">Bem-vindo ao Booking of times!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
           editar estas informações depois.

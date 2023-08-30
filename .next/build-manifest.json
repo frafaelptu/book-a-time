@@ -22,10 +22,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/register/update-profile": [
+    "/schedule/[username]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/register/update-profile.js"
+      "static/chunks/pages/schedule/[username].js"
     ]
   },
   "ampFirstPages": []
