@@ -108,6 +108,8 @@ export default function TimeIntervals() {
     await router.push('/register/update-profile')
   }
 
+
+
   return (
     <Container>
       <Header>
