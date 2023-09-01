@@ -23,14 +23,14 @@ export default async function handle(
       username,
     },
   })
-  console.log(user)
+  // console.log(user)
   if (!user) {
     return res.status(400).json({ message: 'User does not exists.' })
   }
 
   const referenceDate = dayjs(String(date))
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
-  console.log(isPastDate)
+  // console.log(isPastDate)
 
   if (isPastDate) {
     return res.json({ availability: [] })
@@ -43,7 +43,7 @@ export default async function handle(
     },
   })
 
-  console.log(userAvailability)
+  //  console.log(userAvailability)
   if (!userAvailability) {
     return res.json({ availability: [] })
   }
@@ -59,5 +59,24 @@ export default async function handle(
     return startHour + i
   })
 
-  return res.json({ possibleTimes })
+  const blokedTimes = await prisma.scheduling.findMany({
+    select: {
+      date: true,
+    },
+    where: {
+      user_id: user.id,
+      date: {
+        gte: referenceDate.set('hour', startHour).toDate(),
+        lte: referenceDate.set('hour', endHour).toDate(),
+      },
+    },
+  })
+
+  const availableTimes = possibleTimes.filter((time) => {
+    return !blokedTimes.some(
+      (blokedTime) => blokedTime.date.getHours() === time,
+    )
+  })
+
+  return res.json({ possibleTimes, availableTimes })
 }

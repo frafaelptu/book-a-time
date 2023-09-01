@@ -30,7 +30,7 @@ export function ConfirmStep() {
     resolver: zodResolver(confirmFormShema),
   })
   function handleConfirmScheduling(data: ConfirmFormData) {
-    console.log(data)
+    //console.log(data)
   }
 
   console.log(errors.name?.root?.message)

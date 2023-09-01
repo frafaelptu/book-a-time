@@ -62,7 +62,7 @@ export default function Register() {
         return
       }
 
-      console.log(err)
+      //console.log(err)
     }
   }
 
