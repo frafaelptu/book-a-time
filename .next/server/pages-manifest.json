@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/users/[username]/availability": "pages/api/users/[username]/availability.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/schedule/[username]": "pages/schedule/[username].js"
+  "/api/users/[username]/blocked-dates": "pages/api/users/[username]/blocked-dates.js",
+  "/schedule/[username]": "pages/schedule/[username].js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }

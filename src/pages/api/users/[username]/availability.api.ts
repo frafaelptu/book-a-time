@@ -1,7 +1,6 @@
 import { prisma } from '@/src/lib/prisma'
 import dayjs from 'dayjs'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { start } from 'repl'
 
 export default async function handle(
   req: NextApiRequest,
@@ -33,7 +32,7 @@ export default async function handle(
   // console.log(isPastDate)
 
   if (isPastDate) {
-    return res.json({ availability: [] })
+    return res.json({ possibleTimes: [], availableTimes: [] })
   }
 
   const userAvailability = await prisma.userTimeInterval.findFirst({
@@ -45,7 +44,7 @@ export default async function handle(
 
   //  console.log(userAvailability)
   if (!userAvailability) {
-    return res.json({ availability: [] })
+    return res.json({ possibleTimes: [], availableTimes: [] })
   }
 
   const { time_start_in_minutes, time_end_in_minutes } = userAvailability
