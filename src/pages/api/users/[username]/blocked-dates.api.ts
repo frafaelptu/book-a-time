@@ -41,5 +41,28 @@ export default async function handle(
     )
   })
 
-  return res.json({ blockedWeekDays })
+  const paramMonth = String(month).padStart(2, '0')
+  const blockedDatesRaw: Array<{ date: number }> = await prisma.$queryRaw`
+  SELECT 
+    EXTRACT(DAY FROM S.DATE) as date,
+    COUNT(S.date)  as amount,
+    ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) as size
+  FROM schedulings S
+
+  LEFT JOIN user_time_intervals UTI
+    ON UTI.week_day = WEEKDAY(DATE_ADD(S.date, INTERVAL 1 DAY))
+
+  WHERE S.user_id = ${user.id}
+    AND DATE_FORMAT(S.date, "%Y-%m") = ${`${year}-${paramMonth}`}
+
+  GROUP BY EXTRACT(DAY FROM S.DATE),
+  ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
+
+  HAVING amount >= size
+  `
+
+  // console.log(blockedDatesRaw)
+  const blockedDates = blockedDatesRaw.map((item) => item.date)
+
+  return res.json({ blockedWeekDays, blockedDates })
 }

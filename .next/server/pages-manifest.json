@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/api/users/[username]/availability": "pages/api/users/[username]/availability.js",
   "/api/users/[username]/blocked-dates": "pages/api/users/[username]/blocked-dates.js",
+  "/api/users/[username]/availability": "pages/api/users/[username]/availability.js",
   "/schedule/[username]": "pages/schedule/[username].js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }
