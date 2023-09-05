@@ -2,7 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/register/update-profile": "pages/register/update-profile.js",
-  "/schedule/[username]": "pages/schedule/[username].js",
-  "/register/time-intervals": "pages/register/time-intervals.js"
+  "/api/users/[username]/blocked-dates": "pages/api/users/[username]/blocked-dates.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
+  "/api/users/[username]/availability": "pages/api/users/[username]/availability.js",
+  "/api/users/[username]/schedule": "pages/api/users/[username]/schedule.js",
+  "/": "pages/index.js",
+  "/schedule/[username]": "pages/schedule/[username].js"
 }
