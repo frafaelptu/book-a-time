@@ -1,0 +1,11 @@
+{
+    "explorer.compactFolders": false,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace",
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "tabnine.experimentalAutoImports": true,
+}
